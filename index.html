@@ -12,46 +12,10 @@
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-messages/angular-messages.min.js"></script>
     <script src="bower_components/angular-locale-pt-br/angular-locale_pt-br.js"></script>
-
-    <script>
-        angular.module('app', ['ngMessages']);
-        angular.module('app').controller('appCtrl', function($scope, $http) {
-
-            $scope.text = 'Hello World';
-            $scope.produtos = [];
-
-            var init = function() {
-                var url = 'http://www.mocky.io/v2/582e2f05110000b61bd761ae';
-                $http.get(url).success(function(data) {
-                    $scope.produtos = data;
-                }).error(function(data, status) {
-                    console.log(data);
-                });
-            };
-
-            $scope.produtos2 = [{
-                codigo: '03',
-                nome: 'Produto 03',
-                preco: 44.34,
-                data: new Date()
-            }, {
-                codigo: '04',
-                nome: 'Produto 04',
-                preco: 94.34,
-                data: new Date()
-            }];
-
-            $scope.adicionar = function(produto) {
-                console.log(produto);
-                produto.data = new Date();
-                $scope.produtos.push(angular.copy(produto));
-                $scope.produto = null;
-            };
-
-            init();
-        });
-    </script>
-    <script src="js/tableProdutoDirective.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/appCtrl.js"></script>
+    <script src="js/services/produtoApiService.js"></script>
+    <script src="js/directives/tableProdutoDirective.js"></script>
 </head>
 
 <body ng-controller="appCtrl">
@@ -78,7 +42,7 @@
         <button class="btn btn-primary btn-block" ng-disabled="produtoForm.$invalid" ng-click="adicionar(produto)">Salvar</button>
     </form>
 
-    <div ng-messages="produtoForm.nome.$error" class="alert alert-danger" ng-show="produtoForm.$dirty">
+    <div ng-messages="produtoForm.nome.$error" class="alert alert-danger" ng-show="produtoForm.$dirty && produtoForm.$invalid">
         <div ng-message="required">
             Por favor, preencha o campo nome!
         </div>
