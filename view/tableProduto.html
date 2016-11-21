@@ -1,0 +1,21 @@
+<div>
+    <input type="text" placeholder="Pesquisar" class="form-control" ng-model="pesquisa" />
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="produto in produtos | filter: pesquisa">
+                <td>{{produto.codigo}}</td>
+                <td>{{produto.nome}}</td>
+                <td>{{produto.preco | currency}}</td>
+                <td>{{produto.data | date:'EEEE dd/MM/yy'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

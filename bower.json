@@ -1,0 +1,17 @@
+{
+  "name": "asdf",
+  "authors": [
+    "guilherme.pacheco <guilherfp@gmail.com.br>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title Page</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="bower_components/angular-locale-pt-br/angular-locale_pt-br.js"></script>
+
+    <script>
+        angular.module('app', ['ngMessages']);
+        angular.module('app').controller('appCtrl', function($scope, $http) {
+
+            $scope.text = 'Hello World';
+            $scope.produtos = [];
+
+            var init = function() {
+                var url = 'http://www.mocky.io/v2/582e2f05110000b61bd761ae';
+                $http.get(url).success(function(data) {
+                    $scope.produtos = data;
+                }).error(function(data, status) {
+                    console.log(data);
+                });
+            };
+
+            $scope.produtos2 = [{
+                codigo: '03',
+                nome: 'Produto 03',
+                preco: 44.34,
+                data: new Date()
+            }, {
+                codigo: '04',
+                nome: 'Produto 04',
+                preco: 94.34,
+                data: new Date()
+            }];
+
+            $scope.adicionar = function(produto) {
+                console.log(produto);
+                produto.data = new Date();
+                $scope.produtos.push(angular.copy(produto));
+                $scope.produto = null;
+            };
+
+            init();
+        });
+    </script>
+    <script src="js/tableProdutoDirective.js"></script>
+</head>
+
+<body ng-controller="appCtrl">
+    <h1 class="text-center">{{text}}</h1>
+
+    <div>
+        <div class="col-md-6">
+            <table-produto value="produtos"></table-produto>
+        </div>
+        <div class="col-md-6">
+            <table-produto value="produtos2"></table-produto>
+        </div>
+    </div>
+    <form name="produtoForm">
+        <legend>Castrado</legend>
+        <div class="form-group">
+            <label for="codigo">Código</label>
+            <input name="codigo" type="text" class="form-control" id="codigo" placeholder="Código" ng-model="produto.codigo" ng-required="true">
+        </div>
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input name="nome" type="text" class="form-control" id="nome" placeholder="Nome" ng-model="produto.nome" ng-required="true" ng-minlength="5">
+        </div>
+        <button class="btn btn-primary btn-block" ng-disabled="produtoForm.$invalid" ng-click="adicionar(produto)">Salvar</button>
+    </form>
+
+    <div ng-messages="produtoForm.nome.$error" class="alert alert-danger" ng-show="produtoForm.$dirty">
+        <div ng-message="required">
+            Por favor, preencha o campo nome!
+        </div>
+        <div ng-message="minlength">
+            O campo nome deve ter no mínimo 5 caracteres.
+        </div>
+    </div>
+
+</body>
+
+</html>
