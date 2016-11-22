@@ -29,22 +29,25 @@
             <table-produto value="produtos2"></table-produto>
         </div>
     </div>
-    <form name="produtoForm">
-        <legend>Castrado</legend>
-        <div class="form-group">
-            <label for="codigo">Código</label>
-            <input name="codigo" type="text" class="form-control" id="codigo" placeholder="Código" ng-model="produto.codigo" ng-required="true">
-        </div>
-        <div class="form-group">
-            <label for="nome">Nome</label>
-            <input name="nome" type="text" class="form-control" id="nome" placeholder="Nome" ng-model="produto.nome" ng-required="true" ng-minlength="5">
-        </div>
-        <button class="btn btn-primary btn-block" ng-disabled="produtoForm.$invalid" ng-click="adicionar(produto)">Salvar</button>
-    </form>
+    <div class="col-lg-12">
+        <form name="produtoForm">
+            <legend>Castrado</legend>
+            <div class="form-group">
+                <label for="codigo">Código</label>
+                <input name="codigo" type="text" class="form-control" id="codigo" placeholder="Código" ng-model="produto.codigo" ng-required="true">
+            </div>
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input name="nome" type="text" class="form-control" id="nome" placeholder="Nome" ng-model="produto.nome" ng-required="true" ng-minlength="5">
+            </div>
+            <button class="btn btn-primary btn-block" ng-disabled="produtoForm.$invalid" ng-click="adicionar(produto)">Salvar</button>
+        </form>
 
-    <div ng-messages="produtoForm.nome.$error" class="alert alert-danger" ng-show="produtoForm.$dirty && produtoForm.$invalid">
-        <div ng-message="required">Por favor, preencha o campo nome!</div>
-        <div ng-message="minlength">O campo nome deve ter no mínimo 5 caracteres.</div>
+        <div ng-messages="produtoForm.nome.$error" class="alert alert-danger" ng-show="produtoForm.$dirty && produtoForm.$invalid">
+            <div ng-message="required">Por favor, preencha o campo nome!</div>
+            <div ng-message="minlength">O campo nome deve ter no mínimo 5 caracteres.</div>
+        </div>
+
     </div>
 </body>
 
